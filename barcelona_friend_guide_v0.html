@@ -1,0 +1,162 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="theme-color" content="#E8E0D4">
+<title>Barcelona — the version we loved</title>
+<link rel="preconnect" href="https://unpkg.com">
+<link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" integrity="sha256-p4NxAoJBhIINfQ3ynD0fuY6NpqQ8MZ7Y1tA6d1v7w2I=" crossorigin="">
+<style>
+:root{
+  --paper:#E8E0D4;--ink:#151515;--muted:#5c5851;--line:rgba(21,21,21,.18);
+  --gracia:#E45E40;--office:#222;--sagrada:#E5B83F;--encants:#6F9C88;--poblenou:#507DAA;--sea:#2C94B8;
+}
+*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif}a{color:inherit}
+.hero{min-height:94vh;padding:24px clamp(20px,5vw,72px) 42px;display:grid;grid-template-rows:auto 1fr auto;border-bottom:1px solid var(--line)}
+.top{display:flex;justify-content:space-between;gap:24px;font-size:.72rem;letter-spacing:.12em;font-weight:700}.hero-copy{align-self:center}.issue{font-size:.78rem;letter-spacing:.16em;font-weight:700;margin-bottom:18px}h1{font-size:clamp(4.5rem,14vw,11rem);line-height:.76;letter-spacing:-.085em;margin:0;max-width:1150px}.hero-sub{max-width:720px;font-size:clamp(1.05rem,2vw,1.45rem);line-height:1.42;margin:32px 0 0}.hero-bottom{display:flex;justify-content:space-between;align-items:end;gap:24px}.route-link{background:var(--ink);color:#fff;text-decoration:none;padding:15px 18px;font-weight:700;font-size:.8rem;letter-spacing:.08em}.manifesto{max-width:470px;text-align:right;font-size:.92rem;line-height:1.5}
+.sticky-nav{position:sticky;top:0;z-index:40;min-height:54px;background:rgba(232,224,212,.94);backdrop-filter:blur(14px);border-bottom:1px solid var(--line);display:flex;align-items:center;justify-content:center;gap:6px;overflow:auto;padding:0 12px}.sticky-nav a{text-decoration:none;font-size:.69rem;font-weight:700;white-space:nowrap;display:flex;align-items:center;gap:5px;padding:9px}.sticky-nav span{width:8px;height:8px;border-radius:50%;background:var(--dot)}
+main{max-width:1380px;margin:auto}.chapter{border-bottom:1px solid var(--line)}
+.stop{min-height:72vh;display:grid;grid-template-columns:minmax(90px,.2fr) 1fr;position:relative}.stop:before{content:"";position:absolute;inset:0 auto 0 0;width:10px;background:var(--accent)}.num{font-size:clamp(3rem,8vw,7rem);line-height:1;font-weight:700;letter-spacing:-.06em;padding:38px 20px;color:var(--accent)}.stop-main{padding:clamp(36px,6vw,86px) clamp(22px,8vw,120px);display:flex;flex-direction:column;justify-content:center}.eyebrow{font-size:.74rem;letter-spacing:.18em;font-weight:700;margin-bottom:12px}h2{font-size:clamp(3.1rem,8vw,7.5rem);line-height:.83;letter-spacing:-.075em;margin:0;max-width:1050px}.intro{font-size:clamp(1.1rem,2.1vw,1.55rem);line-height:1.48;max-width:850px;margin:30px 0}.note{display:grid;grid-template-columns:120px minmax(0,690px);gap:18px;border-top:1px solid var(--line);padding-top:20px}.note+ .note{margin-top:20px}.note span{font-size:.72rem;font-weight:700;letter-spacing:.12em}.note p{margin:0;line-height:1.5;color:#3c3c3c}.meta{display:flex;justify-content:space-between;gap:12px;margin-top:35px;font-size:.74rem;font-weight:700;letter-spacing:.1em}.meta b{color:var(--accent)}.actions{display:flex;flex-wrap:wrap;gap:8px;margin-top:16px}.actions a{text-decoration:none;border:1px solid var(--ink);padding:12px 15px;font-weight:700;font-size:.74rem;letter-spacing:.08em}.actions .go{background:var(--accent);border-color:var(--accent)}
+.map-section{padding:clamp(38px,6vw,78px) clamp(20px,5vw,72px);border-bottom:1px solid var(--line)}.map-head{display:grid;grid-template-columns:1.1fr .9fr;gap:36px;align-items:end;margin-bottom:28px}.map-head h2{font-size:clamp(3.3rem,8vw,7rem)}.map-copy{font-size:1.04rem;line-height:1.52;max-width:600px}.map-wrap{display:grid;grid-template-columns:1fr 320px;border:1px solid var(--ink);min-height:580px;background:#d8d2c6}.map{min-height:580px}.map-side{border-left:1px solid var(--ink);padding:22px;background:rgba(232,224,212,.96)}.map-side h3{font-size:1rem;margin:0 0 18px}.legend{display:grid;gap:16px}.legend-item{display:grid;grid-template-columns:12px 1fr;gap:10px;align-items:start}.legend-dot{width:10px;height:10px;border-radius:50%;margin-top:5px;background:var(--c)}.legend-item b{display:block;font-size:.8rem;letter-spacing:.08em}.legend-item small{display:block;color:var(--muted);line-height:1.4;margin-top:3px}.gracia-box{margin-top:24px;border-top:1px solid var(--line);padding-top:18px;font-size:.9rem;line-height:1.5}.gracia-box b{color:var(--gracia)}
+.callout{background:var(--ink);color:#fff;padding:clamp(36px,7vw,90px) clamp(22px,8vw,120px);display:grid;grid-template-columns:.75fr 1.25fr;gap:32px;align-items:start}.callout-kicker{font-size:.72rem;letter-spacing:.15em;font-weight:700}.callout h3{font-size:clamp(2.3rem,5vw,4.8rem);line-height:.9;letter-spacing:-.05em;margin:0 0 20px}.callout p{font-size:1.05rem;line-height:1.55;max-width:700px;margin:0}.nope{display:flex;flex-wrap:wrap;gap:10px;margin-top:24px}.nope span{border:1px solid rgba(255,255,255,.45);padding:10px 12px;font-size:.74rem;font-weight:700;letter-spacing:.08em}
+footer{padding:50px 22px 70px;text-align:center;font-size:.72rem;font-weight:700;letter-spacing:.12em}
+.leaflet-container{font:12px/1.4 Arial,Helvetica,sans-serif;background:#d9d4ca}.leaflet-popup-content-wrapper,.leaflet-popup-tip{background:var(--paper);color:var(--ink);border-radius:0;box-shadow:none;border:1px solid var(--ink)}.leaflet-popup-content{margin:12px 14px}.pin{width:18px;height:18px;border-radius:50%;border:3px solid #fff;box-shadow:0 0 0 1px #111;background:var(--pin)}
+@media(max-width:820px){.hero{min-height:86vh;padding:18px 18px 28px}h1{font-size:clamp(4rem,21vw,7rem)}.hero-bottom{display:block}.manifesto{text-align:left;margin-top:20px}.stop{grid-template-columns:58px 1fr;min-height:auto}.num{font-size:2.5rem;padding:28px 10px}.stop-main{padding:34px 16px 54px 12px}h2{font-size:clamp(3rem,18vw,5.2rem)}.intro{font-size:1.08rem;margin:24px 0}.note{grid-template-columns:1fr;gap:6px}.map-head{grid-template-columns:1fr}.map-wrap{grid-template-columns:1fr}.map{min-height:480px}.map-side{border-left:0;border-top:1px solid var(--ink)}.callout{grid-template-columns:1fr}}
+</style>
+</head>
+<body>
+<header class="hero">
+  <div class="top"><span>BARCELONA / FRIEND EDITION</span><span>FROM OUR JULY 2026 TRIP</span></div>
+  <div class="hero-copy">
+    <div class="issue">ONE CITY / VERY SUBJECTIVE</div>
+    <h1>START<br>WITH<br>GRÀCIA.</h1>
+    <p class="hero-sub">Not a checklist of Barcelona’s greatest hits. This is the version of the city we actually loved: neighbourhoods first, monuments second, and plenty of room to just wander.</p>
+  </div>
+  <div class="hero-bottom">
+    <a class="route-link" href="#map">OPEN THE MAP ↓</a>
+    <div class="manifesto"><b>OUR RULE:</b> if you only remember one thing, make it Gràcia. We could have spent much more time there.</div>
+  </div>
+</header>
+
+<nav class="sticky-nav" aria-label="Guide sections">
+  <a href="#gracia" style="--dot:var(--gracia)"><span></span>GRÀCIA</a>
+  <a href="#office" style="--dot:var(--office)"><span></span>OFFICE</a>
+  <a href="#sagrada" style="--dot:var(--sagrada)"><span></span>SAGRADA</a>
+  <a href="#encants" style="--dot:var(--encants)"><span></span>ENCANTS</a>
+  <a href="#poblenou" style="--dot:var(--poblenou)"><span></span>POBLENOU</a>
+  <a href="#map" style="--dot:var(--sea)"><span></span>MAP</a>
+</nav>
+
+<main>
+<section class="chapter" id="gracia">
+  <article class="stop" style="--accent:var(--gracia)">
+    <div class="num">01</div><div class="stop-main">
+      <div class="eyebrow">THE MAIN RECOMMENDATION</div><h2>GRÀCIA</h2>
+      <p class="intro">This was the Barcelona we loved most. Small streets, little squares, cafés, bars, independent shops and a neighbourhood rhythm that feels like actual city life rather than a sightseeing corridor.</p>
+      <div class="note"><span>DO THIS</span><p>Do not build a route. Pick a point around Vila de Gràcia, Carrer de Verdi or Plaça del Sol and then just drift. Sit down when somewhere looks good. Turn into the smaller street.</p></div>
+      <div class="note"><span>WHY</span><p>It feels compact, human-scale and local. The pleasure is not a landmark — it is spending a few hours there without needing one.</p></div>
+      <div class="meta"><span>HALF DAY → FULL EVENING</span><b>OUR FAVOURITE</b></div>
+      <div class="actions"><a class="go" href="https://www.google.com/maps/search/?api=1&query=Vila%20de%20Gracia%20Barcelona" target="_blank">OPEN GRÀCIA →</a><a href="https://www.google.com/maps/search/?api=1&query=Carrer%20de%20Verdi%20Barcelona" target="_blank">CARRER VERDI</a></div>
+    </div>
+  </article>
+</section>
+
+<section class="chapter" id="office">
+  <article class="stop" style="--accent:var(--office)">
+    <div class="num">02</div><div class="stop-main">
+      <div class="eyebrow">YOUR WORK BASE / CIUTAT VELLA</div><h2>TRAFALGAR 6</h2>
+      <p class="intro">Your office is extremely central: Despacho 28, Carrer de Trafalgar 6. Useful as a starting point — but we would not let “central” dictate where you spend all your free time.</p>
+      <div class="note"><span>OUR MOVE</span><p>Finish work, then head out of the old-centre gravity field. Gràcia is the obvious evening target; Encants and Poblenou work well for a different side of the city.</p></div>
+      <div class="meta"><span>CIUTAT VELLA</span><b>BASE, NOT DESTINATION</b></div>
+      <div class="actions"><a class="go" href="https://www.google.com/maps/search/?api=1&query=Despacho%2028%2C%20Carrer%20de%20Trafalgar%206%2C%20Barcelona" target="_blank">OFFICE IN MAPS →</a><a href="https://www.google.com/maps/dir/?api=1&origin=Carrer%20de%20Trafalgar%206%2C%20Barcelona&destination=Vila%20de%20Gracia%2C%20Barcelona&travelmode=transit" target="_blank">OFFICE → GRÀCIA</a></div>
+    </div>
+  </article>
+</section>
+
+<section class="chapter" id="sagrada">
+  <article class="stop" style="--accent:var(--sagrada)">
+    <div class="num">03</div><div class="stop-main">
+      <div class="eyebrow">THE EXCEPTION TO OUR GAUDÍ FATIGUE</div><h2>SAGRADA<br>FAMÍLIA</h2>
+      <p class="intro">We did not really fall for the whole Gaudí trail. But Sagrada Família is different: huge, strange and genuinely worth seeing from the inside.</p>
+      <div class="note"><span>IMPORTANT</span><p>Book the entrance early. Time slots can sell out, so do not assume you can simply decide to go that afternoon.</p></div>
+      <div class="note"><span>OUR TAKE</span><p>If you want one big-ticket Barcelona monument, make it this one — and then go back to neighbourhood life.</p></div>
+      <div class="meta"><span>PREBOOK</span><b>YES, THIS ONE</b></div>
+      <div class="actions"><a class="go" href="https://www.google.com/maps/search/?api=1&query=Sagrada%20Familia%20Barcelona" target="_blank">MAPS →</a><a href="https://sagradafamilia.org/en/tickets" target="_blank">OFFICIAL TICKETS</a></div>
+    </div>
+  </article>
+</section>
+
+<section class="chapter" id="encants">
+  <article class="stop" style="--accent:var(--encants)">
+    <div class="num">04</div><div class="stop-main">
+      <div class="eyebrow">A DIFFERENT BARCELONA</div><h2>ELS<br>ENCANTS</h2>
+      <p class="intro">Worth it less as “the best flea market ever” and more because it pulls you into a completely different Barcelona: Glòries, infrastructure, old industry, everyday trading — not old town postcard scenery.</p>
+      <div class="note"><span>DO THIS</span><p>Browse without a mission. Look up at the mirrored roof, take the ramps, then keep moving east instead of returning to the centre.</p></div>
+      <div class="meta"><span>MARKET + CITY TRANSITION</span><b>CHANGE OF SCENE</b></div>
+      <div class="actions"><a class="go" href="https://www.google.com/maps/search/?api=1&query=Mercat%20dels%20Encants%20Barcelona" target="_blank">ENCANTS →</a><a href="https://www.google.com/maps/dir/?api=1&origin=Mercat%20dels%20Encants%2C%20Barcelona&destination=Poblenou%2C%20Barcelona&travelmode=walking" target="_blank">WALK TO POBLENOU</a></div>
+    </div>
+  </article>
+</section>
+
+<section class="chapter" id="poblenou">
+  <article class="stop" style="--accent:var(--poblenou)">
+    <div class="num">05</div><div class="stop-main">
+      <div class="eyebrow">OLD INDUSTRY → SEA</div><h2>POBLENOU</h2>
+      <p class="intro">A nice counterpoint to Gràcia. Less immediately charming, more mixed: former industrial streets, studios, new development, neighbourhood cafés — and eventually the sea.</p>
+      <div class="note"><span>BEST FLOW</span><p>Encants → Glòries → wander through Poblenou → Rambla del Poblenou → Bogatell. It works because the city keeps changing around you.</p></div>
+      <div class="note"><span>END HERE</span><p>If the weather works, finish at Bogatell rather than turning the day back into another old-town loop.</p></div>
+      <div class="meta"><span>HALF DAY</span><b>URBAN DRIFT</b></div>
+      <div class="actions"><a class="go" href="https://www.google.com/maps/dir/?api=1&origin=Mercat%20dels%20Encants%2C%20Barcelona&destination=Platja%20del%20Bogatell%2C%20Barcelona&waypoints=Poblenou%2C%20Barcelona%7CRambla%20del%20Poblenou%2C%20Barcelona&travelmode=walking" target="_blank">FULL WALK →</a><a href="https://www.google.com/maps/search/?api=1&query=Poblenou%20Barcelona" target="_blank">POBLENOU</a></div>
+    </div>
+  </article>
+</section>
+
+<section class="map-section" id="map">
+  <div class="map-head">
+    <div><div class="eyebrow">ORIENTATION / OUR BARCELONA</div><h2>GRÀCIA<br>AT THE CENTRE.</h2></div>
+    <div class="map-copy">The map is deliberately biased. Gràcia gets the emotional centre. The office is your practical anchor; Sagrada sits between; Encants and Poblenou pull you east into a different Barcelona and down to the sea.</div>
+  </div>
+  <div class="map-wrap">
+    <div id="leafletMap" class="map" aria-label="Map of Barcelona recommendations"></div>
+    <aside class="map-side">
+      <h3>THE SHORT VERSION</h3>
+      <div class="legend">
+        <div class="legend-item" style="--c:var(--gracia)"><span class="legend-dot"></span><div><b>GRÀCIA</b><small>Spend time here. Wander, eat, drink, repeat.</small></div></div>
+        <div class="legend-item" style="--c:var(--office)"><span class="legend-dot"></span><div><b>TRAFALGAR 6</b><small>Work base in the centre.</small></div></div>
+        <div class="legend-item" style="--c:var(--sagrada)"><span class="legend-dot"></span><div><b>SAGRADA FAMÍLIA</b><small>One monument we would prebook.</small></div></div>
+        <div class="legend-item" style="--c:var(--encants)"><span class="legend-dot"></span><div><b>ELS ENCANTS</b><small>See another side of the city.</small></div></div>
+        <div class="legend-item" style="--c:var(--poblenou)"><span class="legend-dot"></span><div><b>POBLENOU</b><small>Walk east, then south to the sea.</small></div></div>
+      </div>
+      <div class="gracia-box"><b>GRÀCIA TIP</b><br>Do not optimise it. The whole point is to lose the route.</div>
+    </aside>
+  </div>
+</section>
+
+<section class="callout">
+  <div class="callout-kicker">WHAT WE WOULD SKIP</div>
+  <div><h3>DON’T BUILD THE TRIP AROUND THE CHECKLIST.</h3><p>La Rambla did nothing for us. And after seeing enough Gaudí from the outside, we were happier spending the time in actual neighbourhoods. Sagrada Família is the exception.</p><div class="nope"><span>NO LA RAMBLA DAY</span><span>NO GAUDÍ MARATHON</span><span>YES TO GRÀCIA</span><span>YES TO WANDERING</span></div></div>
+</section>
+</main>
+
+<footer>BARCELONA · A VERY SUBJECTIVE FRIEND GUIDE · V0.1</footer>
+
+<script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js" integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo=" crossorigin=""></script>
+<script>
+const map=L.map('leafletMap',{scrollWheelZoom:false,zoomControl:true}).setView([41.399,2.169],13);
+L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png',{maxZoom:19,attribution:'© OpenStreetMap contributors'}).addTo(map);
+const pts=[
+  {name:'Gràcia',lat:41.4036,lng:2.1567,c:'#E45E40',text:'Our favourite area — make this the centre of the trip.'},
+  {name:'Office · Trafalgar 6',lat:41.3898,lng:2.1749,c:'#222222',text:'Despacho 28 · Carrer de Trafalgar 6.'},
+  {name:'Sagrada Família',lat:41.4036,lng:2.1744,c:'#E5B83F',text:'Book entry in advance.'},
+  {name:'Els Encants',lat:41.4034,lng:2.1877,c:'#6F9C88',text:'Market + a different side of Barcelona.'},
+  {name:'Poblenou',lat:41.4035,lng:2.2026,c:'#507DAA',text:'Industrial streets, local life, then head to the sea.'},
+  {name:'Bogatell',lat:41.3946,lng:2.2072,c:'#2C94B8',text:'A good ending to the Poblenou walk.'}
+];
+function icon(c){return L.divIcon({className:'',html:`<div class="pin" style="--pin:${c}"></div>`,iconSize:[18,18],iconAnchor:[9,9],popupAnchor:[0,-10]})}
+const markers=[];
+pts.forEach(p=>{const m=L.marker([p.lat,p.lng],{icon:icon(p.c)}).addTo(map).bindPopup(`<b>${p.name}</b><br>${p.text}`);markers.push(m)});
+const gracia=L.circle([41.4036,2.1567],{radius:1050,color:'#E45E40',weight:2,fillColor:'#E45E40',fillOpacity:.08,dashArray:'6 7'}).addTo(map);
+const group=L.featureGroup(markers.concat([gracia]));map.fitBounds(group.getBounds().pad(.12));
+</script>
+</body></html>
