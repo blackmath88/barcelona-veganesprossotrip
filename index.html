@@ -4,6 +4,7 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <meta name="theme-color" content="#e9e0d1">
+<link rel="icon" href="data:,">
 <title>Barcelona — vegan, espresso & the bits we loved</title>
 <meta name="description" content="A very subjective Barcelona guide: Gràcia first, vegan food, espresso, browsing and a few places worth making time for.">
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
@@ -14,6 +15,13 @@
 @media(max-width:800px){.top,.hero-bottom,.map-head,.places-head{align-items:flex-start;flex-direction:column}.hero{min-height:760px}.hero-rule{text-align:left}.intro-grid{display:block}.intro-side{border-left:0;border-top:1px solid var(--line)}.map-shell{display:block}.map,.map-list{min-height:380px;max-height:none}.map-list{border-left:0;border-top:1px solid var(--line)}.chapter{grid-template-columns:52px 1fr;border-left-width:6px}.num{padding:24px 14px}.cards{grid-template-columns:1fr}.card{border-right:0}.callout{display:block}.callout .small{margin-bottom:28px}.nav{justify-content:flex-start}.filter,.tab{padding-left:12px;padding-right:12px}}
 </style>
 <style>
+/* Share the main row without narrowing or moving the existing hero copy. */
+.hero{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:center}
+.hero>.top,.hero-copy,.hero-bottom{grid-column:1/-1}
+.hero-copy{grid-row:2}
+.hero-tag{grid-column:2;grid-row:2;max-width:100%;width:min(44vw,620px);justify-self:end;align-self:start;margin-top:4vh;pointer-events:none}
+@media(max-width:900px){.hero{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr auto auto}.hero-tag{grid-column:1;grid-row:3;width:70vw;justify-self:center;margin:24px 0 0}}
+@media(max-width:600px){.hero{grid-template-rows:auto 1fr auto}.hero-tag{display:none}}
 .hero h1{line-height:.83;margin:-.04em 0 0;padding:.08em 0 .04em;overflow:visible}
 .zone-label{background:transparent;border:0;color:var(--zone-color);font-size:clamp(.85rem,1.7vw,1.35rem);font-weight:800;letter-spacing:.12em;line-height:1.05;text-align:center;text-transform:uppercase;white-space:nowrap;text-shadow:0 1px 0 var(--paper)}
 .zone-label span{display:block;font-size:.55em;letter-spacing:.1em;margin-top:5px}
@@ -37,7 +45,7 @@ html,body{max-width:100%;overflow-x:hidden}
 </style>
 </head>
 <body>
-<header class="hero" id="overview"><div class="top"><span>Barcelona / friend edition</span><span>very subjective / July 2026</span></div><div class="hero-copy"><div class="kicker">vegan • espresso • wandering • browsing</div><h1>START<br>WITH<br>GRÀCIA.</h1><p class="hero-sub">A friend guide, not a checklist. The Barcelona we actually liked: Gràcia first, excellent coffee, vegan food, a few big sights, and routes that pull you away from La Rambla.</p></div><div class="hero-bottom"><a class="hero-button" href="#map">OPEN THE MAP ↓</a><div class="hero-rule"><b>OUR RULE:</b> Gràcia is the destination. Trafalgar 6 is the practical base. Poblenou is the after-work drift. Sagrada Família is the one monument we would actively prebook.</div></div></header>
+<header class="hero" id="overview"><div class="top"><span>Barcelona / friend edition</span><span>very subjective / July 2026</span></div><div class="hero-copy"><div class="kicker">vegan • espresso • wandering • browsing</div><h1>START<br>WITH<br>GRÀCIA.</h1><p class="hero-sub">A friend guide, not a checklist. The Barcelona we actually liked: Gràcia first, excellent coffee, vegan food, a few big sights, and routes that pull you away from La Rambla.</p></div><img src="assets/svg/hero-son-republica.svg" alt="Són república — they are a republic (stencil tag)" class="hero-tag"><div class="hero-bottom"><a class="hero-button" href="#map">OPEN THE MAP ↓</a><div class="hero-rule"><b>OUR RULE:</b> Gràcia is the destination. Trafalgar 6 is the practical base. Poblenou is the after-work drift. Sagrada Família is the one monument we would actively prebook.</div></div></header>
 <nav class="nav" aria-label="Guide navigation"><a href="#overview">OVERVIEW</a><a href="#map"><i style="--c:var(--see)"></i>MAP</a><a href="#gracia"><i style="--c:var(--love)"></i>GRÀCIA</a><a href="#poblenou">POBLENOU</a><a href="#encants">ENCANTS</a><a href="#sagrada">SAGRADA</a><a href="#office">OFFICE BASE</a><a href="#all-places">ALL PLACES</a></nav>
 <main class="wrap">
 <section class="intro-grid"><div class="intro-main"><div class="kicker">THE SHORT VERSION</div><h2>DON’T DO<br>BARCELONA<br>LIKE A LIST.</h2><p class="lede">We liked the city most when it felt like a city: little squares, independent streets, coffee, food, markets, browsing and walking. Gràcia was the clear favourite. Els Encants and Poblenou were useful because they showed a totally different Barcelona.</p></div><aside class="intro-side"><div class="rule-list"><div class="rule"><b>01 / GRÀCIA</b><p>Make real time for it. Wander around Verdi, Virreina, Plaça del Sol and Vila de Gràcia.</p></div><div class="rule"><b>02 / SAGRADA</b><p>Yes, even if you are not doing a Gaudí pilgrimage. Book entrance early; the slots sell out.</p></div><div class="rule"><b>03 / LA RAMBLA</b><p>We would not plan time around it. Cross it if necessary, but do not make it the trip.</p></div><div class="rule"><b>04 / TRAFALGAR 6</b><p>The office is perfectly placed for an eastward after-work line: Arc de Triomf → Glòries → Poblenou.</p></div></div></aside></section>
