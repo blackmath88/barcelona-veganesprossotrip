@@ -10,10 +10,6 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://tile.openstreetmap.org">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
-
-
-
-
 <style>
 /* Typography, layout and components. Responsive adjustments follow below. */
 :root {
@@ -258,6 +254,8 @@ button:focus-visible,a:focus-visible,[tabindex]:focus-visible {
   border: 1px solid var(--line);
 }
 .map {
+  position: relative;
+  isolation: isolate;
   min-height: 570px;
   background: #d5d0c3;
 }
@@ -469,6 +467,7 @@ footer {
   background: var(--love);
 }
 .leaflet-popup-content {
+  margin-right: 44px;
   font-family: Arial,Helvetica,sans-serif;
   line-height: 1.6;
   font-size: .9375rem;
@@ -489,7 +488,7 @@ footer {
 .hero-tag {
   grid-column: 2;
   grid-row: 2;
-  max-width: 100%;
+  max-width: calc(100% - 32px);
   width: min(44vw,620px);
   justify-self: end;
   align-self: start;
@@ -501,7 +500,7 @@ footer {
   border: 0;
   color: var(--zone-color);
   font-size: clamp(.875rem,1.2vw,1.0625rem);
-  font-weight: 800;
+  font-weight: 600;
   letter-spacing: .06em;
   line-height: 1.2;
   text-align: center;
@@ -688,6 +687,9 @@ footer {
   margin-top: 8px;
   line-height: 1.5;
 }
+.export-button:hover small,.export-button:focus-visible small {
+  color: inherit;
+}
 .export-status {
   min-height: 1.3em;
   color: var(--love);
@@ -814,6 +816,11 @@ body.export-open {
 }
 .card .personal {
   margin-top: 12px;
+}
+.map .leaflet-popup-close-button {
+  width: 44px;
+  height: 44px;
+  line-height: 44px;
 }
 .leaflet-popup-content p {
   margin: 12px 0;
@@ -971,7 +978,7 @@ body.export-open {
   .chapter-main {
     padding: 24px 20px 48px;
   }
-  .leaflet-bar a {
+  .map .leaflet-control-zoom a {
     width: 44px;
     height: 44px;
     line-height: 44px;
@@ -1064,7 +1071,7 @@ const zones=[
 {id:'office',label:'TRAFALGAR OFFICE',caption:'WORK BASE',type:'recommended',color:'#1e1e1e',center:[41.389,2.174],shape:[[41.394,2.168],[41.394,2.181],[41.384,2.181],[41.384,2.168]]},
 {id:'encants',label:'ELS ENCANTS',caption:'OTHER BARCELONA',type:'recommended',color:'#a46b34',center:[41.402,2.187],shape:[[41.407,2.180],[41.407,2.195],[41.395,2.195],[41.395,2.180]]}
 ];
-zones.forEach(zone=>{L.polygon(zone.shape,{pane:'zone-pane',color:zone.color,weight:1.5,opacity:.48,fillColor:zone.color,fillOpacity:zone.type==='avoid'?.1:.075,dashArray:zone.type==='avoid'?'4 5':undefined,interactive:false}).addTo(map);L.marker(zone.center,{pane:'zone-label-pane',interactive:false,icon:L.divIcon({className:'zone-label',html:`${zone.label}<span>${zone.caption}</span>`,iconSize:[150,42],iconAnchor:[75,21]})}).addTo(map)});
+zones.forEach(zone=>{L.polygon(zone.shape,{pane:'zone-pane',color:zone.color,weight:1.5,opacity:.48,fillColor:zone.color,fillOpacity:zone.type==='avoid'?.1:.075,dashArray:zone.type==='avoid'?'4 5':undefined,interactive:false}).addTo(map);L.marker(zone.center,{pane:'zone-label-pane',interactive:false,icon:L.divIcon({className:'zone-label',html:`${zone.label}<span>${zone.caption}</span>`,iconSize:[150,42],iconAnchor:[75,21]})}).addTo(map).getElement().style.setProperty('--zone-color',zone.color)});
 function iconFor(place,useSvg=false){const asset=markerIconMap[place.category];if(useSvg&&asset)return L.divIcon({className:'',html:`<span class="svg-marker ${place.personal?'is-pick':''}"><img src="${asset}" alt=""></span>`,iconSize:[32,40],iconAnchor:[16,39],popupAnchor:[0,-39]});return L.divIcon({className:'',html:`<div class="marker marker-fallback" style="--marker:${place.personal?'#db5e43':categoryColor[place.category]}"></div>`,iconSize:[18,18],iconAnchor:[9,9],popupAnchor:[0,-10]})}
 function popupFor(place){return `<b>${place.name}</b><br><span>${place.note}</span><br><br><a href="${mapsUrl(place)}" target="_blank" rel="noopener">Open in Google Maps →</a>`}
 places.forEach(place=>{const marker=L.marker([place.lat,place.lng],{icon:iconFor(place)}).bindPopup(popupFor(place));markerMap.set(place.id,marker);marker.addTo(map)});
