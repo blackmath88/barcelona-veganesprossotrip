@@ -10,38 +10,994 @@
 <link rel="preconnect" href="https://cdn.jsdelivr.net">
 <link rel="preconnect" href="https://tile.openstreetmap.org">
 <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css">
+
+
+
+
 <style>
-:root{--paper:#e9e0d1;--paper2:#f2eadf;--ink:#171717;--muted:#655e54;--line:rgba(23,23,23,.2);--coffee:#9a5b3c;--vegan:#4f7e5c;--buy:#a46b34;--see:#356b92;--love:#db5e43;--base:#1e1e1e;--sea:#2b91ad}*{box-sizing:border-box}html{scroll-behavior:smooth}body{margin:0;background:var(--paper);color:var(--ink);font-family:Arial,Helvetica,sans-serif}a{color:inherit}.wrap{max-width:1440px;margin:auto}.hero{min-height:88vh;padding:22px clamp(18px,5vw,72px) 42px;display:grid;grid-template-rows:auto 1fr auto;border-bottom:1px solid var(--line)}.top{display:flex;justify-content:space-between;gap:18px;font-size:.7rem;letter-spacing:.13em;font-weight:800;text-transform:uppercase}.hero-copy{align-self:center}.kicker{font-size:.75rem;letter-spacing:.16em;font-weight:800;margin-bottom:16px;text-transform:uppercase}.hero h1{font-size:clamp(4.5rem,13vw,10.5rem);line-height:.78;letter-spacing:-.085em;margin:0;max-width:1200px}.hero-sub{font-size:clamp(1.05rem,2vw,1.45rem);line-height:1.45;max-width:780px;margin:30px 0 0}.hero-bottom{display:flex;align-items:end;justify-content:space-between;gap:24px}.hero-button{display:inline-block;background:var(--ink);color:#fff;text-decoration:none;padding:14px 18px;font-size:.75rem;letter-spacing:.1em;font-weight:800}.hero-rule{max-width:520px;text-align:right;font-size:.9rem;line-height:1.5}.hero-rule b{color:var(--love)}.nav{position:sticky;top:0;z-index:100;background:rgba(233,224,209,.94);backdrop-filter:blur(12px);border-bottom:1px solid var(--line);display:flex;justify-content:center;gap:5px;overflow:auto;padding:0 10px}.nav a{text-decoration:none;padding:17px 10px;font-size:.68rem;font-weight:800;letter-spacing:.08em;white-space:nowrap}.nav i{display:inline-block;width:7px;height:7px;border-radius:50%;background:var(--c);margin-right:7px}.intro-grid{display:grid;grid-template-columns:1.25fr .75fr;border-bottom:1px solid var(--line)}.intro-main,.intro-side{padding:clamp(36px,6vw,80px) clamp(20px,5vw,72px)}.intro-side{border-left:1px solid var(--line);background:var(--paper2)}h2,h3,p{margin-top:0}.intro-main h2,.map-head h2,.places-head h2{font-size:clamp(3rem,7vw,7rem);line-height:.85;letter-spacing:-.07em;margin:0 0 28px}.lede,.desc{font-size:1.18rem;line-height:1.55;max-width:720px}.rule{border-top:1px solid var(--line);padding:18px 0}.rule:last-child{border-bottom:1px solid var(--line)}.rule b,.note b,.small{font-size:.68rem;letter-spacing:.13em}.rule p,.note p{line-height:1.5;margin:8px 0 0}.map-section{padding:clamp(36px,6vw,80px) clamp(20px,5vw,72px);border-bottom:1px solid var(--line)}.map-head{display:flex;justify-content:space-between;align-items:end;gap:40px}.map-head>p,.places-head>p{max-width:460px;line-height:1.55}.filters,.section-tabs{display:flex;gap:0;overflow-x:auto;border-top:1px solid var(--line);border-bottom:1px solid var(--line);margin:28px 0;padding:0}.filter,.tab{appearance:none;border:0;background:none;color:var(--muted);font:inherit;font-size:.68rem;font-weight:800;letter-spacing:.08em;padding:14px 15px;white-space:nowrap;cursor:pointer;border-right:1px solid var(--line)}.filter:first-child,.tab:first-child{border-left:1px solid var(--line)}.filter:hover,.filter:focus-visible,.tab:hover,.tab:focus-visible{color:var(--ink);background:var(--paper2)}.filter[aria-pressed=true],.tab[aria-selected=true]{color:var(--ink);background:var(--love);box-shadow:inset 0 -3px var(--ink)}button:focus-visible,a:focus-visible,[tabindex]:focus-visible{outline:3px solid var(--see);outline-offset:3px}.map-shell{display:grid;grid-template-columns:minmax(0,1.65fr) minmax(290px,.75fr);min-height:570px;border:1px solid var(--line)}.map{min-height:570px;background:#d5d0c3}.map-list{background:var(--paper2);border-left:1px solid var(--line);overflow:auto;max-height:570px}.map-list-head{padding:18px 20px;font-size:.72rem;letter-spacing:.14em;font-weight:800;border-bottom:1px solid var(--line)}.place-row{padding:17px 20px;border-bottom:1px solid var(--line);cursor:pointer}.place-row:hover,.place-row.is-active{background:var(--paper)}.place-top{display:flex;justify-content:space-between;gap:12px}.place-top b{font-size:1rem}.pill{font-size:.62rem;font-weight:800;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap}.place-row p{font-size:.85rem;line-height:1.45;margin:8px 0}.place-links,.actions{display:flex;flex-wrap:wrap;gap:13px}.place-links a,.actions a{font-size:.65rem;font-weight:800;letter-spacing:.08em;text-decoration:none;border-bottom:1px solid currentColor;padding-bottom:3px}.personal{color:var(--love);font-size:.65rem;letter-spacing:.08em;font-weight:800}.source-note{font-size:.72rem;color:var(--muted);line-height:1.5;margin-top:16px}.chapters{border-bottom:1px solid var(--line)}.chapter{display:grid;grid-template-columns:100px 1fr;border-bottom:1px solid var(--line);border-left:10px solid var(--accent)}.chapter:last-child{border-bottom:0}.num{padding:28px;font-size:.75rem;font-weight:800}.chapter-main{padding:clamp(34px,6vw,80px) clamp(20px,7vw,110px);max-width:1000px}.chapter h3{font-size:clamp(3.5rem,8vw,8rem);line-height:.8;letter-spacing:-.08em;margin:0 0 28px}.note{border-top:1px solid var(--line);padding:18px 0;max-width:680px}.actions{margin-top:24px}.actions a{padding:13px 16px;border:1px solid var(--ink)}.actions .primary{background:var(--ink);color:#fff}.places-section{padding:clamp(36px,6vw,80px) clamp(20px,5vw,72px);border-bottom:1px solid var(--line)}.places-head{display:flex;justify-content:space-between;align-items:end;gap:40px}.cards{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));border-top:1px solid var(--line);margin-top:28px}.card{padding:22px 20px 26px;border-right:1px solid var(--line);border-bottom:1px solid var(--line);border-left:4px solid var(--accent)}.card:nth-child(3n+1){border-left-width:4px}.card h3{font-size:1.5rem;letter-spacing:-.04em;margin:0 0 7px}.card-meta{color:var(--muted);font-size:.68rem;font-weight:800;letter-spacing:.1em;text-transform:uppercase}.card p{line-height:1.5;margin:15px 0;max-width:400px}.callout{display:grid;grid-template-columns:1fr 2fr;gap:40px;padding:clamp(36px,6vw,80px) clamp(20px,5vw,72px);background:var(--love)}.callout h2{font-size:clamp(3rem,7vw,7rem);line-height:.8;letter-spacing:-.07em;margin:0 0 24px}.callout p{font-size:1.15rem;line-height:1.5;max-width:700px}.nope{display:flex;flex-wrap:wrap;gap:8px}.nope span{border:1px solid var(--ink);padding:10px 12px;font-size:.68rem;font-weight:800;letter-spacing:.1em}footer{padding:30px 20px;text-align:center;font-size:.68rem;letter-spacing:.12em;font-weight:800}.marker{width:18px;height:18px;border-radius:50% 50% 50% 0;background:var(--marker);border:2px solid #fff;box-shadow:0 1px 3px #333;transform:rotate(-45deg)}.marker.star{border-radius:3px;transform:rotate(45deg);background:var(--love)}.leaflet-popup-content{font-family:Arial,Helvetica,sans-serif;line-height:1.45}.leaflet-popup-content a{font-weight:800;font-size:.8rem}.asset-slot{display:none}
-@media(max-width:800px){.top,.hero-bottom,.map-head,.places-head{align-items:flex-start;flex-direction:column}.hero{min-height:760px}.hero-rule{text-align:left}.intro-grid{display:block}.intro-side{border-left:0;border-top:1px solid var(--line)}.map-shell{display:block}.map,.map-list{min-height:380px;max-height:none}.map-list{border-left:0;border-top:1px solid var(--line)}.chapter{grid-template-columns:52px 1fr;border-left-width:6px}.num{padding:24px 14px}.cards{grid-template-columns:1fr}.card{border-right:0}.callout{display:block}.callout .small{margin-bottom:28px}.nav{justify-content:flex-start}.filter,.tab{padding-left:12px;padding-right:12px}}
-</style>
-<style>
-/* Share the main row without narrowing or moving the existing hero copy. */
-.hero{grid-template-columns:minmax(0,1.15fr) minmax(0,1fr);align-items:center}
-.hero>.top,.hero-copy,.hero-bottom{grid-column:1/-1}
-.hero-copy{grid-row:2}
-.hero-tag{grid-column:2;grid-row:2;max-width:100%;width:min(44vw,620px);justify-self:end;align-self:start;margin-top:4vh;pointer-events:none}
-@media(max-width:900px){.hero{grid-template-columns:minmax(0,1fr);grid-template-rows:auto 1fr auto auto}.hero-tag{grid-column:1;grid-row:3;width:70vw;justify-self:center;margin:24px 0 0}}
-@media(max-width:600px){.hero{grid-template-rows:auto 1fr auto}.hero-tag{display:none}}
-.hero h1{line-height:.83;margin:-.04em 0 0;padding:.08em 0 .04em;overflow:visible}
-.zone-label{background:transparent;border:0;color:var(--zone-color);font-size:clamp(.85rem,1.7vw,1.35rem);font-weight:800;letter-spacing:.12em;line-height:1.05;text-align:center;text-transform:uppercase;white-space:nowrap;text-shadow:0 1px 0 var(--paper)}
-.zone-label span{display:block;font-size:.55em;letter-spacing:.1em;margin-top:5px}
-.leaflet-pane.zone-pane{z-index:300}.leaflet-pane.zone-label-pane{z-index:350}
-.chapter,.chapter-main,.map-section,.places-section{min-width:0}
-@media(max-width:800px){.hero h1{line-height:.86;padding-top:.1em}}
-.hero{background-image:linear-gradient(90deg,rgba(233,224,209,.98) 0%,rgba(233,224,209,.92) 58%,rgba(233,224,209,.72) 100%),url('assets/assets/svg/backgrounds/bg-gracia-pattern.svg');background-position:center, right bottom;background-repeat:no-repeat;background-size:auto, min(760px,72vw) auto}
-#gracia{background-image:linear-gradient(rgba(233,224,209,.86),rgba(233,224,209,.92)),url('assets/assets/svg/backgrounds/bg-gracia-pattern.svg');background-size:cover;background-position:center}
-#poblenou{background-image:linear-gradient(rgba(233,224,209,.88),rgba(233,224,209,.92)),url('assets/assets/svg/backgrounds/bg-poblenou-pattern.svg');background-size:cover;background-position:center}
-#encants{background-image:linear-gradient(rgba(233,224,209,.86),rgba(233,224,209,.92)),url('assets/assets/svg/backgrounds/bg-encants-pattern.svg');background-size:cover;background-position:center}
-#sagrada{background-image:linear-gradient(rgba(233,224,209,.9),rgba(233,224,209,.94)),url('assets/assets/svg/backgrounds/bg-sagrada-pattern.svg');background-size:cover;background-position:center}
-#office{background-image:linear-gradient(rgba(233,224,209,.9),rgba(233,224,209,.94)),url('assets/assets/svg/backgrounds/bg-office-pattern.svg');background-size:cover;background-position:center}
-.ui-icon{width:15px;height:15px;display:inline-block;vertical-align:-3px;margin-right:5px;object-fit:contain}.filter .ui-icon,.tab .ui-icon{width:14px;height:14px;margin-right:4px}.badge-icon{width:15px;height:15px;vertical-align:-3px;margin-right:5px;object-fit:contain}.svg-marker{position:relative;display:block;width:32px;height:40px}.svg-marker img{display:block;width:32px;height:40px}.svg-marker.is-pick:after{content:'';position:absolute;inset:-4px;border:2px solid var(--love);border-radius:50%;pointer-events:none}.marker-fallback{width:18px;height:18px}
-</style>
-<style>
-.map-tools{display:flex;flex-direction:column;align-items:flex-end;gap:18px;max-width:460px}.map-tools p{margin:0;line-height:1.55}.utility-button,.export-button,.route-actions button{appearance:none;border:1px solid var(--ink);background:var(--paper);color:var(--ink);font:inherit;font-size:.68rem;font-weight:800;letter-spacing:.1em;padding:12px 14px;cursor:pointer}.utility-button{white-space:nowrap}.utility-button:hover,.utility-button:focus-visible,.export-button:hover,.export-button:focus-visible{background:var(--ink);color:#fff}.export-sheet{position:fixed;inset:0;z-index:300;display:grid;place-items:center;background:rgba(23,23,23,.38);padding:20px}.export-sheet[hidden]{display:none}.export-dialog{width:min(680px,100%);max-height:min(86dvh,760px);overflow:auto;background:var(--paper);border:1px solid var(--ink);box-shadow:0 18px 50px rgba(23,23,23,.24);padding:24px}.export-head{display:flex;justify-content:space-between;gap:18px;border-bottom:1px solid var(--line);padding-bottom:16px}.export-head h2{font-size:2.2rem;line-height:.9;margin:0}.export-close{border:0;background:none;font-size:1.5rem;line-height:1;cursor:pointer}.export-options{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:8px;margin-top:18px}.export-button{text-align:left;min-height:48px}.export-button small{display:block;color:var(--muted);font-size:.62rem;font-weight:400;letter-spacing:0;margin-top:4px}.export-status{min-height:1.3em;color:var(--love);font-size:.78rem;font-weight:800;margin:18px 0 0}.routes-section{padding:clamp(36px,6vw,80px) clamp(20px,5vw,72px);border-bottom:1px solid var(--line)}.routes-head{display:flex;justify-content:space-between;align-items:end;gap:40px}.routes-head p{max-width:460px;line-height:1.55}.route-list{border-top:1px solid var(--line);margin-top:28px}.route{display:grid;grid-template-columns:90px 1fr;gap:20px;border-bottom:1px solid var(--line);padding:26px 0}.route-number{font-size:2.4rem;font-weight:800;letter-spacing:-.08em;color:var(--love)}.route h3{font-size:1.8rem;letter-spacing:-.05em;margin:0 0 8px}.route p{line-height:1.5;max-width:720px}.route-stops{display:flex;flex-wrap:wrap;gap:0;margin:18px 0}.route-stop{padding:9px 12px;border:1px solid var(--line);border-right:0;font-size:.72rem;font-weight:800}.route-stop:last-child{border-right:1px solid var(--line)}.route-actions{display:flex;gap:10px;flex-wrap:wrap}.route-actions button{min-height:44px}.toast{position:fixed;z-index:400;left:50%;bottom:22px;transform:translate(-50%,10px);background:var(--ink);color:#fff;padding:12px 16px;font-size:.75rem;font-weight:800;opacity:0;pointer-events:none;transition:opacity .18s,transform .18s}.toast.is-visible{opacity:1;transform:translate(-50%,0)}body.export-open{overflow:hidden}@media(max-width:800px){.map-tools{align-items:flex-start;max-width:none;width:100%}.map-tools p{max-width:460px}.utility-button{min-height:44px}.export-sheet{place-items:end center;padding:0}.export-dialog{width:100%;max-height:88dvh;padding:20px 18px calc(20px + env(safe-area-inset-bottom));border-width:1px 0 0}.export-options{grid-template-columns:1fr}.export-button{min-height:52px}.routes-head{align-items:flex-start;flex-direction:column;gap:16px}.route{grid-template-columns:42px 1fr;gap:12px;padding:22px 0}.route-number{font-size:1.8rem}.route h3{font-size:1.45rem}.route-stops{display:block}.route-stop{border-right:1px solid var(--line);border-bottom:0}.route-stop:last-child{border-bottom:1px solid var(--line)}}@media(prefers-reduced-motion:reduce){html{scroll-behavior:auto}.toast{transition:none}}
-</style>
-<style>
-@media(max-width:800px){.place-links a{padding:12px 0;min-height:44px;display:inline-flex;align-items:center}.map-list .place-links a{padding:10px 4px}.place-links{gap:8px}}
-html,body{max-width:100%;overflow-x:hidden}
+/* Typography, layout and components. Responsive adjustments follow below. */
+:root {
+  --paper: #e9e0d1;
+  --paper2: #f2eadf;
+  --ink: #171717;
+  --muted: #655e54;
+  --line: rgba(23,23,23,.2);
+  --coffee: #9a5b3c;
+  --vegan: #4f7e5c;
+  --buy: #a46b34;
+  --see: #356b92;
+  --love: #db5e43;
+  --base: #1e1e1e;
+  --sea: #2b91ad;
+  --tracking-display: -.055em;
+  --tracking-heading: -.04em;
+  --tracking-label: .08em;
+  --leading-display: .92;
+  --leading-heading: .96;
+  --leading-body: 1.6;
+  --section-space: clamp(48px,6vw,80px);
+}
+* {
+  box-sizing: border-box;
+}
+html {
+  scroll-behavior: smooth;
+  scroll-padding-top: 72px;
+}
+body {
+  margin: 0;
+  background: var(--paper);
+  color: var(--ink);
+  font-family: Arial,Helvetica,sans-serif;
+  line-height: var(--leading-body);
+}
+a {
+  color: inherit;
+}
+.wrap {
+  max-width: 1440px;
+  margin: auto;
+}
+.hero {
+  min-height: 88vh;
+  padding: 22px clamp(18px,5vw,72px) 42px;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  border-bottom: 1px solid var(--line);
+  grid-template-columns: minmax(0,1.15fr) minmax(0,1fr);
+  align-items: center;
+  background-image: linear-gradient(90deg,rgba(233,224,209,.98) 0%,rgba(233,224,209,.92) 58%,rgba(233,224,209,.72) 100%),url('assets/assets/svg/backgrounds/bg-gracia-pattern.svg');
+  background-position: center, right bottom;
+  background-repeat: no-repeat;
+  background-size: auto, min(760px,72vw) auto;
+  row-gap: 24px;
+}
+.top {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  font-size: .75rem;
+  letter-spacing: var(--tracking-label);
+  font-weight: 800;
+  text-transform: uppercase;
+  line-height: 1.4;
+}
+.hero-copy {
+  align-self: center;
+  grid-row: 2;
+}
+.kicker {
+  font-size: .75rem;
+  letter-spacing: var(--tracking-label);
+  font-weight: 800;
+  margin-bottom: 16px;
+  text-transform: uppercase;
+  line-height: 1.5;
+}
+.hero h1 {
+  font-size: clamp(4.5rem,13vw,10.5rem);
+  line-height: var(--leading-display);
+  letter-spacing: var(--tracking-display);
+  margin: 0;
+  max-width: 1200px;
+  padding: .1em 0 .04em;
+  overflow: visible;
+}
+.hero-sub {
+  font-size: clamp(1.05rem,2vw,1.45rem);
+  line-height: 1.55;
+  max-width: min(780px,65ch);
+  margin: 24px 0 0;
+}
+.hero-bottom {
+  display: flex;
+  align-items: end;
+  justify-content: space-between;
+  gap: 24px;
+}
+.hero-button {
+  display: inline-block;
+  background: var(--ink);
+  color: #fff;
+  text-decoration: none;
+  padding: 14px 18px;
+  font-size: .75rem;
+  letter-spacing: .1em;
+  font-weight: 800;
+  min-height: 44px;
+}
+.hero-rule {
+  max-width: 520px;
+  text-align: right;
+  font-size: .9rem;
+  line-height: var(--leading-body);
+}
+.hero-rule b {
+  color: var(--love);
+}
+.nav {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  background: rgba(233,224,209,.94);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid var(--line);
+  display: flex;
+  justify-content: center;
+  gap: 5px;
+  overflow: auto;
+  padding: 0 10px;
+}
+.nav a {
+  text-decoration: none;
+  padding: 17px 10px;
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: var(--tracking-label);
+  white-space: nowrap;
+  min-height: 44px;
+  line-height: 1.4;
+}
+.nav i {
+  display: inline-block;
+  width: 7px;
+  height: 7px;
+  border-radius: 50%;
+  background: var(--c);
+  margin-right: 7px;
+}
+.intro-grid {
+  display: grid;
+  grid-template-columns: 1.25fr .75fr;
+  border-bottom: 1px solid var(--line);
+}
+.intro-main,.intro-side {
+  padding: var(--section-space) clamp(20px,5vw,72px);
+}
+.intro-side {
+  border-left: 1px solid var(--line);
+  background: var(--paper2);
+}
+h2,h3,p {
+  margin-top: 0;
+}
+.lede,.desc {
+  font-size: 1.18rem;
+  line-height: var(--leading-body);
+  max-width: 65ch;
+}
+.rule {
+  border-top: 1px solid var(--line);
+  padding: 18px 0;
+}
+.rule:last-child {
+  border-bottom: 1px solid var(--line);
+}
+.rule b,.note b,.small {
+  font-size: .75rem;
+  letter-spacing: var(--tracking-label);
+}
+.rule p,.note p {
+  line-height: var(--leading-body);
+  margin: 8px 0 0;
+}
+.map-section {
+  padding: var(--section-space) clamp(20px,5vw,72px);
+  border-bottom: 1px solid var(--line);
+}
+.map-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 40px;
+}
+.map-head>p,.places-head>p {
+  max-width: 42ch;
+  line-height: var(--leading-body);
+}
+.filters,.section-tabs {
+  display: flex;
+  gap: 0;
+  overflow-x: auto;
+  border-top: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  margin: 28px 0;
+  padding: 0;
+}
+.filter,.tab {
+  appearance: none;
+  border: 0;
+  background: none;
+  color: var(--muted);
+  font: inherit;
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: var(--tracking-label);
+  padding: 14px 15px;
+  white-space: nowrap;
+  cursor: pointer;
+  border-right: 1px solid var(--line);
+  min-height: 48px;
+  line-height: 1.4;
+}
+.filter:first-child,.tab:first-child {
+  border-left: 1px solid var(--line);
+}
+.filter:hover,.filter:focus-visible,.tab:hover,.tab:focus-visible {
+  color: var(--ink);
+  background: var(--paper2);
+}
+button:focus-visible,a:focus-visible,[tabindex]:focus-visible {
+  outline: 3px solid var(--see);
+  outline-offset: 3px;
+}
+.map-shell {
+  display: grid;
+  grid-template-columns: minmax(0,1.65fr) minmax(290px,.75fr);
+  min-height: 570px;
+  border: 1px solid var(--line);
+}
+.map {
+  min-height: 570px;
+  background: #d5d0c3;
+}
+.map-list {
+  background: var(--paper2);
+  border-left: 1px solid var(--line);
+  overflow: auto;
+  max-height: 570px;
+}
+.map-list-head {
+  padding: 18px 20px;
+  font-size: .75rem;
+  letter-spacing: var(--tracking-label);
+  font-weight: 800;
+  border-bottom: 1px solid var(--line);
+}
+.place-row {
+  padding: 20px;
+  border-bottom: 1px solid var(--line);
+  cursor: pointer;
+}
+.place-row:hover,.place-row.is-active {
+  background: var(--paper);
+}
+.place-top {
+  display: flex;
+  justify-content: space-between;
+  gap: 8px 12px;
+  flex-wrap: wrap;
+  align-items: baseline;
+}
+.place-top b {
+  font-size: 1rem;
+}
+.pill {
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  white-space: nowrap;
+}
+.place-row p {
+  font-size: .9375rem;
+  line-height: 1.55;
+  margin: 12px 0;
+}
+.place-links,.actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 16px;
+}
+.place-links a,.actions a {
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: var(--tracking-label);
+  text-decoration: none;
+  border-bottom: 1px solid currentColor;
+  padding-bottom: 3px;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+  line-height: 1.4;
+}
+.personal {
+  color: var(--love);
+  font-size: .75rem;
+  letter-spacing: var(--tracking-label);
+  font-weight: 800;
+}
+.source-note {
+  font-size: .8125rem;
+  color: var(--muted);
+  line-height: 1.55;
+  margin-top: 16px;
+  max-width: 72ch;
+}
+.chapters {
+  border-bottom: 1px solid var(--line);
+}
+.chapter {
+  display: grid;
+  grid-template-columns: 80px minmax(0,1fr);
+  border-bottom: 1px solid var(--line);
+  border-left: 10px solid var(--accent);
+}
+.chapter:last-child {
+  border-bottom: 0;
+}
+.num {
+  padding: 28px;
+  font-size: .75rem;
+  font-weight: 800;
+}
+.chapter-main {
+  padding: var(--section-space) clamp(20px,5vw,72px);
+  max-width: 1000px;
+  width: 100%;
+}
+.note {
+  border-top: 1px solid var(--line);
+  padding: 24px 0;
+  max-width: 65ch;
+}
+.actions {
+  margin-top: 24px;
+}
+.actions a {
+  padding: 13px 16px;
+  border: 1px solid var(--ink);
+}
+.actions .primary {
+  background: var(--ink);
+  color: #fff;
+}
+.places-section {
+  padding: var(--section-space) clamp(20px,5vw,72px);
+  border-bottom: 1px solid var(--line);
+}
+.places-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 40px;
+}
+.cards {
+  display: grid;
+  grid-template-columns: repeat(3,minmax(0,1fr));
+  border-top: 1px solid var(--line);
+  margin-top: 32px;
+}
+.card {
+  padding: 24px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  border-left: 4px solid var(--accent);
+  min-width: 0;
+}
+.card h3 {
+  font-size: 1.5rem;
+  letter-spacing: -.025em;
+  margin: 0 0 12px;
+  line-height: 1.15;
+  overflow-wrap: anywhere;
+}
+.card-meta {
+  color: var(--muted);
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: var(--tracking-label);
+  text-transform: uppercase;
+  line-height: 1.5;
+  margin-bottom: 12px;
+}
+.card p {
+  line-height: var(--leading-body);
+  margin: 16px 0 20px;
+  max-width: 60ch;
+}
+.callout {
+  display: grid;
+  grid-template-columns: 1fr 2fr;
+  gap: 40px;
+  padding: var(--section-space) clamp(20px,5vw,72px);
+  background: var(--love);
+}
+.callout h2 {
+  font-size: clamp(3rem,7vw,7rem);
+  line-height: 1;
+  letter-spacing: -.045em;
+  margin: 0 0 24px;
+}
+.callout p {
+  font-size: 1.15rem;
+  line-height: var(--leading-body);
+  max-width: 65ch;
+}
+.nope {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+.nope span {
+  border: 1px solid var(--ink);
+  padding: 10px 12px;
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: var(--tracking-label);
+}
+footer {
+  padding: 32px 20px;
+  text-align: center;
+  font-size: .75rem;
+  letter-spacing: var(--tracking-label);
+  font-weight: 800;
+  line-height: 1.6;
+}
+.marker {
+  width: 18px;
+  height: 18px;
+  border-radius: 50% 50% 50% 0;
+  background: var(--marker);
+  border: 2px solid #fff;
+  box-shadow: 0 1px 3px #333;
+  transform: rotate(-45deg);
+}
+.marker.star {
+  border-radius: 3px;
+  transform: rotate(45deg);
+  background: var(--love);
+}
+.leaflet-popup-content {
+  font-family: Arial,Helvetica,sans-serif;
+  line-height: 1.6;
+  font-size: .9375rem;
+}
+.leaflet-popup-content a {
+  font-weight: 800;
+  font-size: .8rem;
+  display: inline-flex;
+  align-items: center;
+  min-height: 44px;
+}
+.asset-slot {
+  display: none;
+}
+.hero>.top,.hero-copy,.hero-bottom {
+  grid-column: 1/-1;
+}
+.hero-tag {
+  grid-column: 2;
+  grid-row: 2;
+  max-width: 100%;
+  width: min(44vw,620px);
+  justify-self: end;
+  align-self: start;
+  margin-top: 4vh;
+  pointer-events: none;
+}
+.zone-label {
+  background: transparent;
+  border: 0;
+  color: var(--zone-color);
+  font-size: clamp(.875rem,1.2vw,1.0625rem);
+  font-weight: 800;
+  letter-spacing: .06em;
+  line-height: 1.2;
+  text-align: center;
+  text-transform: uppercase;
+  white-space: nowrap;
+  text-shadow: 0 1px 0 var(--paper);
+}
+.zone-label span {
+  display: block;
+  font-size: .6875rem;
+  letter-spacing: .06em;
+  margin-top: 4px;
+}
+.leaflet-pane.zone-pane {
+  z-index: 300;
+}
+.leaflet-pane.zone-label-pane {
+  z-index: 350;
+}
+.chapter,.chapter-main,.map-section,.places-section {
+  min-width: 0;
+}
+#gracia {
+  background-image: linear-gradient(rgba(233,224,209,.86),rgba(233,224,209,.92)),url('assets/assets/svg/backgrounds/bg-gracia-pattern.svg');
+  background-size: cover;
+  background-position: center;
+}
+#poblenou {
+  background-image: linear-gradient(rgba(233,224,209,.88),rgba(233,224,209,.92)),url('assets/assets/svg/backgrounds/bg-poblenou-pattern.svg');
+  background-size: cover;
+  background-position: center;
+}
+#encants {
+  background-image: linear-gradient(rgba(233,224,209,.86),rgba(233,224,209,.92)),url('assets/assets/svg/backgrounds/bg-encants-pattern.svg');
+  background-size: cover;
+  background-position: center;
+}
+#sagrada {
+  background-image: linear-gradient(rgba(233,224,209,.9),rgba(233,224,209,.94)),url('assets/assets/svg/backgrounds/bg-sagrada-pattern.svg');
+  background-size: cover;
+  background-position: center;
+}
+#office {
+  background-image: linear-gradient(rgba(233,224,209,.9),rgba(233,224,209,.94)),url('assets/assets/svg/backgrounds/bg-office-pattern.svg');
+  background-size: cover;
+  background-position: center;
+}
+.ui-icon {
+  width: 15px;
+  height: 15px;
+  display: inline-block;
+  vertical-align: -3px;
+  margin-right: 5px;
+  object-fit: contain;
+}
+.filter .ui-icon,.tab .ui-icon {
+  width: 14px;
+  height: 14px;
+  margin-right: 4px;
+}
+.badge-icon {
+  width: 15px;
+  height: 15px;
+  vertical-align: -3px;
+  margin-right: 5px;
+  object-fit: contain;
+}
+.svg-marker {
+  position: relative;
+  display: block;
+  width: 32px;
+  height: 40px;
+}
+.svg-marker img {
+  display: block;
+  width: 32px;
+  height: 40px;
+}
+.svg-marker.is-pick:after {
+  content: '';
+  position: absolute;
+  inset: -4px;
+  border: 2px solid var(--love);
+  border-radius: 50%;
+  pointer-events: none;
+}
+.marker-fallback {
+  width: 18px;
+  height: 18px;
+}
+.map-tools {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 18px;
+  max-width: 460px;
+}
+.map-tools p {
+  margin: 0;
+  line-height: 1.55;
+}
+.utility-button,.export-button,.route-actions button {
+  appearance: none;
+  border: 1px solid var(--ink);
+  background: var(--paper);
+  color: var(--ink);
+  font: inherit;
+  font-size: .75rem;
+  font-weight: 800;
+  letter-spacing: var(--tracking-label);
+  padding: 12px 14px;
+  cursor: pointer;
+  min-height: 48px;
+  line-height: 1.4;
+}
+.utility-button {
+  white-space: nowrap;
+}
+.utility-button:hover,.utility-button:focus-visible,.export-button:hover,.export-button:focus-visible {
+  background: var(--ink);
+  color: #fff;
+}
+.export-sheet {
+  position: fixed;
+  inset: 0;
+  z-index: 300;
+  display: grid;
+  place-items: center;
+  background: rgba(23,23,23,.38);
+  padding: 20px;
+}
+.export-sheet[hidden] {
+  display: none;
+}
+.export-dialog {
+  width: min(680px,100%);
+  max-height: min(86dvh,760px);
+  overflow: auto;
+  background: var(--paper);
+  border: 1px solid var(--ink);
+  box-shadow: 0 18px 50px rgba(23,23,23,.24);
+  padding: 24px;
+}
+.export-head {
+  display: flex;
+  justify-content: space-between;
+  gap: 18px;
+  border-bottom: 1px solid var(--line);
+  padding-bottom: 16px;
+}
+.export-head h2 {
+  font-size: 2.2rem;
+  line-height: 1;
+  margin: 0;
+  letter-spacing: -.035em;
+}
+.export-close {
+  border: 0;
+  background: none;
+  font-size: 1.5rem;
+  line-height: 1;
+  cursor: pointer;
+  min-width: 44px;
+  min-height: 44px;
+  flex-shrink: 0;
+  color: var(--ink);
+}
+.export-options {
+  display: grid;
+  grid-template-columns: repeat(2,minmax(0,1fr));
+  gap: 8px;
+  margin-top: 18px;
+}
+.export-button {
+  text-align: left;
+  min-height: 48px;
+}
+.export-button small {
+  display: block;
+  color: var(--muted);
+  font-size: .75rem;
+  font-weight: 400;
+  letter-spacing: 0;
+  margin-top: 8px;
+  line-height: 1.5;
+}
+.export-status {
+  min-height: 1.3em;
+  color: var(--love);
+  font-size: .78rem;
+  font-weight: 800;
+  margin: 18px 0 0;
+  line-height: 1.5;
+}
+.routes-section {
+  padding: var(--section-space) clamp(20px,5vw,72px);
+  border-bottom: 1px solid var(--line);
+}
+.routes-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: end;
+  gap: 40px;
+}
+.routes-head p {
+  max-width: 42ch;
+  line-height: var(--leading-body);
+}
+.route-list {
+  border-top: 1px solid var(--line);
+  margin-top: 28px;
+}
+.route {
+  display: grid;
+  grid-template-columns: 72px minmax(0,1fr);
+  gap: 24px;
+  border-bottom: 1px solid var(--line);
+  padding: 32px 0;
+}
+.route-number {
+  font-size: 2.4rem;
+  font-weight: 800;
+  letter-spacing: -.025em;
+  color: var(--love);
+  line-height: 1.1;
+}
+.route h3 {
+  font-size: 2rem;
+  letter-spacing: -.025em;
+  margin: 0 0 12px;
+  line-height: 1.15;
+}
+.route p {
+  line-height: var(--leading-body);
+  max-width: 65ch;
+}
+.route-stops {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 0;
+  margin: 24px 0;
+  list-style: none;
+  padding: 0;
+  counter-reset: stop;
+}
+.route-stop {
+  padding: 4px 16px 4px 0;
+  border: 0;
+  font-size: .875rem;
+  font-weight: 800;
+  line-height: 1.5;
+  counter-increment: stop;
+}
+.route-actions {
+  display: flex;
+  gap: 12px;
+  flex-wrap: wrap;
+}
+.route-actions button {
+  min-height: 44px;
+}
+.toast {
+  position: fixed;
+  z-index: 400;
+  left: 50%;
+  bottom: 22px;
+  transform: translate(-50%,10px);
+  background: var(--ink);
+  color: #fff;
+  padding: 12px 16px;
+  font-size: .75rem;
+  font-weight: 800;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity .18s,transform .18s;
+  max-width: calc(100vw - 32px);
+  width: max-content;
+  text-align: center;
+}
+.toast.is-visible {
+  opacity: 1;
+  transform: translate(-50%,0);
+}
+body.export-open {
+  overflow: hidden;
+}
+.intro-main h2,.map-head h2,.places-head h2,.routes-head h2 {
+  font-size: clamp(2.5rem,6.6vw,6rem);
+  line-height: var(--leading-heading);
+  letter-spacing: var(--tracking-heading);
+  margin: 0 0 24px;
+}
+.chapter-main>h3 {
+  font-size: clamp(2.625rem,8vw,8rem);
+  line-height: .98;
+  letter-spacing: -.035em;
+  margin: 0 0 24px;
+  padding-top: .08em;
+}
+.filter[aria-selected=true],.tab[aria-selected=true] {
+  color: var(--ink);
+  background: var(--love);
+  box-shadow: inset 0 -3px var(--ink);
+}
+.nav a:focus-visible,.filter:focus-visible,.tab:focus-visible {
+  outline-offset: -4px;
+}
+.card:nth-child(3n) {
+  border-right: 0;
+}
+.card .personal {
+  margin-top: 12px;
+}
+.leaflet-popup-content p {
+  margin: 12px 0;
+}
+.map-head,.places-head,.routes-head {
+  flex-wrap: wrap;
+  gap: 24px 40px;
+}
+.map-head>div,.places-head>div,.routes-head>div {
+  min-width: 0;
+}
+.route-stop::before {
+  content: counter(stop, decimal-leading-zero) " / ";
+  font-size: .75rem;
+  color: var(--muted);
+}
+
+@media(max-width:900px) {
+  .hero {
+    grid-template-columns: minmax(0,1fr);
+    grid-template-rows: auto 1fr auto auto;
+  }
+  .hero-tag {
+    grid-column: 1;
+    grid-row: 3;
+    width: 70vw;
+    justify-self: center;
+    margin: 24px 0 0;
+  }
+}
+
+@media(max-width:800px) {
+  .top,.hero-bottom,.map-head,.places-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 24px;
+  }
+  .hero {
+    min-height: 760px;
+    padding: 24px 20px 32px;
+    row-gap: 32px;
+  }
+  .hero-rule {
+    text-align: left;
+  }
+  .intro-grid {
+    display: block;
+  }
+  .intro-side {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .map-shell {
+    display: block;
+  }
+  .map,.map-list {
+    min-height: 380px;
+    max-height: none;
+  }
+  .map-list {
+    border-left: 0;
+    border-top: 1px solid var(--line);
+  }
+  .chapter {
+    grid-template-columns: minmax(0,1fr);
+    border-left-width: 6px;
+  }
+  .num {
+    padding: 24px 20px 0;
+    line-height: 1.4;
+  }
+  .cards {
+    grid-template-columns: 1fr;
+  }
+  .card {
+    border-right: 0;
+    padding: 24px 20px;
+  }
+  .callout {
+    display: block;
+  }
+  .callout .small {
+    margin-bottom: 28px;
+  }
+  .nav {
+    justify-content: flex-start;
+  }
+  .filter,.tab {
+    padding-left: 12px;
+    padding-right: 12px;
+  }
+  .map-tools {
+    align-items: flex-start;
+    max-width: none;
+    width: 100%;
+  }
+  .map-tools p {
+    max-width: 460px;
+  }
+  .utility-button {
+    min-height: 44px;
+  }
+  .export-sheet {
+    place-items: end center;
+    padding: 0;
+  }
+  .export-dialog {
+    width: 100%;
+    max-height: 88dvh;
+    padding: 20px 18px calc(20px + env(safe-area-inset-bottom));
+    border-width: 1px 0 0;
+  }
+  .export-options {
+    grid-template-columns: 1fr;
+  }
+  .export-button {
+    min-height: 52px;
+  }
+  .routes-head {
+    align-items: flex-start;
+    flex-direction: column;
+    gap: 16px;
+  }
+  .route {
+    grid-template-columns: minmax(0,1fr);
+    gap: 12px;
+    padding: 32px 0;
+  }
+  .route-number {
+    font-size: 1.8rem;
+  }
+  .route h3 {
+    font-size: 1.625rem;
+  }
+  .route-stops {
+    display: grid;
+    gap: 8px;
+    margin: 24px 0;
+  }
+  .route-stop {
+    padding: 0;
+  }
+  .place-links a {
+    padding: 12px 0;
+  }
+  .map-list .place-links a {
+    padding: 10px 4px;
+  }
+  .place-links {
+    gap: 8px 16px;
+  }
+  .top {
+    gap: 8px;
+  }
+  .chapter-main {
+    padding: 24px 20px 48px;
+  }
+  .leaflet-bar a {
+    width: 44px;
+    height: 44px;
+    line-height: 44px;
+  }
+  .hero-copy {
+    padding-top: 16px;
+  }
+}
+
+@media(max-width:600px) {
+  .hero {
+    grid-template-rows: auto 1fr auto;
+  }
+  .hero-tag {
+    display: none;
+  }
+}
+
+@media(prefers-reduced-motion:reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  .toast {
+    transition: none;
+  }
+}
 </style>
 </head>
 <body>
@@ -49,7 +1005,7 @@ html,body{max-width:100%;overflow-x:hidden}
 <nav class="nav" aria-label="Guide navigation"><a href="#overview">OVERVIEW</a><a href="#map"><i style="--c:var(--see)"></i>MAP</a><a href="#gracia"><i style="--c:var(--love)"></i>GRÀCIA</a><a href="#poblenou">POBLENOU</a><a href="#encants">ENCANTS</a><a href="#sagrada">SAGRADA</a><a href="#office">OFFICE BASE</a><a href="#all-places">ALL PLACES</a></nav>
 <main class="wrap">
 <section class="intro-grid"><div class="intro-main"><div class="kicker">THE SHORT VERSION</div><h2>DON’T DO<br>BARCELONA<br>LIKE A LIST.</h2><p class="lede">We liked the city most when it felt like a city: little squares, independent streets, coffee, food, markets, browsing and walking. Gràcia was the clear favourite. Els Encants and Poblenou were useful because they showed a totally different Barcelona.</p></div><aside class="intro-side"><div class="rule-list"><div class="rule"><b>01 / GRÀCIA</b><p>Make real time for it. Wander around Verdi, Virreina, Plaça del Sol and Vila de Gràcia.</p></div><div class="rule"><b>02 / SAGRADA</b><p>Yes, even if you are not doing a Gaudí pilgrimage. Book entrance early; the slots sell out.</p></div><div class="rule"><b>03 / LA RAMBLA</b><p>We would not plan time around it. Cross it if necessary, but do not make it the trip.</p></div><div class="rule"><b>04 / TRAFALGAR 6</b><p>The office is perfectly placed for an eastward after-work line: Arc de Triomf → Glòries → Poblenou.</p></div></div></aside></section>
-<section class="map-section" id="map"><div class="map-head"><div><div class="kicker">INTERACTIVE MAP</div><h2>THE PLACES.</h2></div><p>OpenStreetMap tiles + Leaflet, with all points stored directly in this page. No map API key, no embedded Google dependency. Google is only used for place links and photo searches.</p></div><div class="filters" role="tablist" aria-label="Place filters"><button class="filter" data-filter="all" role="tab" aria-selected="true">ALL</button><button class="filter" data-filter="personal" role="tab" aria-selected="false">♥ OUR PICKS</button><button class="filter" data-filter="coffee" role="tab" aria-selected="false">ESPRESSO / COFFEE</button><button class="filter" data-filter="vegan" role="tab" aria-selected="false">VEGAN</button><button class="filter" data-filter="buy" role="tab" aria-selected="false">SECONDHAND / BROWSE / BUY</button><button class="filter" data-filter="see" role="tab" aria-selected="false">SEE / DO</button></div><div class="map-shell"><div id="mapCanvas" class="map" aria-label="Map of Barcelona recommendations"></div><div class="map-list"><div class="map-list-head" id="listTitle">ALL PLACES</div><div id="mapList"></div></div></div><div class="source-note">Map data © OpenStreetMap contributors. Zones are intentionally approximate — this is a friend guide, not a cadastral map. Place details can change — tap through before making a special trip.</div></section>
+<section class="map-section" id="map"><div class="map-head"><div><div class="kicker">INTERACTIVE MAP</div><h2>THE<br>PLACES.</h2></div><p>OpenStreetMap tiles + Leaflet, with all points stored directly in this page. No map API key, no embedded Google dependency. Google is only used for place links and photo searches.</p></div><div class="filters" role="tablist" aria-label="Place filters"><button class="filter" data-filter="all" role="tab" aria-selected="true">ALL</button><button class="filter" data-filter="personal" role="tab" aria-selected="false">♥ OUR PICKS</button><button class="filter" data-filter="coffee" role="tab" aria-selected="false">ESPRESSO / COFFEE</button><button class="filter" data-filter="vegan" role="tab" aria-selected="false">VEGAN</button><button class="filter" data-filter="buy" role="tab" aria-selected="false">SECONDHAND / BROWSE / BUY</button><button class="filter" data-filter="see" role="tab" aria-selected="false">SEE / DO</button></div><div class="map-shell"><div id="mapCanvas" class="map" aria-label="Map of Barcelona recommendations"></div><div class="map-list"><div class="map-list-head" id="listTitle">ALL PLACES</div><div id="mapList"></div></div></div><div class="source-note">Map data © OpenStreetMap contributors. Zones are intentionally approximate — this is a friend guide, not a cadastral map. Place details can change — tap through before making a special trip.</div></section>
 <section class="chapters"><article class="chapter" id="gracia" style="--accent:var(--love)"><div class="num">01</div><div class="chapter-main"><div class="kicker">THE MAIN RECOMMENDATION</div><h3>GRÀCIA</h3><p class="desc">This was the part of Barcelona we loved most. Human scale, little squares, independent shops, cafés and streets where the best move is to stop trying to optimise.</p><div class="section-tabs" role="tablist" aria-label="Gràcia filters" data-scope="Gràcia"></div><div class="actions"><a class="primary" href="https://www.google.com/maps/search/?api=1&query=Vila%20de%20Gracia%20Barcelona" target="_blank" rel="noopener">OPEN GRÀCIA →</a><a href="#all-places" data-jump-filter="buy">BROWSE / BUY</a></div></div></article><article class="chapter" id="office" style="--accent:var(--base)"><div class="num">02</div><div class="chapter-main"><div class="kicker">THE WORK BASE</div><h3>TRAFALGAR 6</h3><p class="desc">The office is at Carrer de Trafalgar 6, just above the old city and close to Arc de Triomf. That makes Poblenou a very natural after-work direction rather than another loop through the tourist centre.</p><div class="note"><b>EASTWARD</b><p>Walk or ride toward Arc de Triomf, Glòries and Poblenou. It gradually changes from monumental centre to everyday neighbourhood and old industrial fabric.</p></div><div class="actions"><a class="primary" href="https://www.google.com/maps/search/?api=1&query=Carrer%20de%20Trafalgar%206%20Barcelona" target="_blank" rel="noopener">OFFICE →</a><a href="https://www.google.com/maps/dir/?api=1&origin=Carrer%20de%20Trafalgar%206%2C%20Barcelona&destination=Rambla%20del%20Poblenou%2C%20Barcelona&travelmode=walking" target="_blank" rel="noopener">WALK TO POBLENOU</a></div></div></article><article class="chapter" id="sagrada" style="--accent:var(--see)"><div class="num">03</div><div class="chapter-main"><div class="kicker">THE BIG SIGHT</div><h3>SAGRADA<br>FAMÍLIA</h3><p class="desc">We were not particularly interested in doing a whole Gaudí circuit. Sagrada Família was the exception: if you want to see it properly, go inside.</p><div class="note"><b>BOOK EARLY</b><p>Entrance slots sell out. Do not rely on buying tickets when you get there.</p></div><div class="actions"><a class="primary" href="https://www.google.com/maps/search/?api=1&query=Sagrada%20Familia%20Barcelona" target="_blank" rel="noopener">MAPS →</a><a href="https://sagradafamilia.org/en/tickets" target="_blank" rel="noopener">OFFICIAL TICKETS</a></div></div></article><article class="chapter" id="encants" style="--accent:var(--buy)"><div class="num">04</div><div class="chapter-main"><div class="kicker">ANOTHER SIDE OF THE CITY</div><h3>ENCANTS →<br>POBLENOU</h3><p class="desc">Els Encants was not “the best market ever”, but it was worth seeing because it moved us out of old-town Barcelona. The mirrored roof is great, the market is huge, and from there the city naturally unfolds east toward Poblenou.</p><div class="note"><b>OUR TAKE</b><p>Good, not great — sometimes a little touristy — but there are treasures and the architecture of the roof is worth seeing.</p></div><div class="note"><b>KEEP GOING</b><p>Do not turn back toward the centre. Continue through Glòries into Poblenou and, if the weather is right, finish near Bogatell.</p></div></div></article><article class="chapter" id="poblenou" style="--accent:var(--sea)"><div class="num">05</div><div class="chapter-main"><div class="kicker">THE EASTWARD DRIFT</div><h3>POBLENOU</h3><p class="desc">A nice urban contrast from the office and Encants: everyday streets, old industrial fabric, a beach ending and a slower eastward line.</p></div></article></section>
 <section class="places-section" id="all-places"><div class="places-head"><div><div class="kicker">ALL PLACES</div><h2>FIELD<br>NOTES.</h2></div><p>One place list, shared by the map and the sections below. The filters stay compact so the guide remains a guide, not a dashboard.</p></div><div class="section-tabs" id="allTabs" role="tablist" aria-label="All place filters"></div><div class="cards" id="allCards"></div></section>
 <section class="callout"><div class="small">OUR BIAS</div><div><h2>NO LA RAMBLA DAY.</h2><p>We would spend that time in Gràcia, walking east from the office, or seeing Sagrada Família properly. Barcelona got better for us the moment we stopped treating the tourist centre as the default.</p><div class="nope"><span>YES GRÀCIA</span><span>YES ESPRESSO</span><span>YES VEGAN</span><span>YES WANDERING</span><span>NO CHECKLIST MARATHON</span></div></div></section>
@@ -116,7 +1072,7 @@ L.circle([41.4027,2.1564],{radius:950,color:'#db5e43',weight:2,fillColor:'#db5e4
 function matches(place,filter){return filter==='all'||(filter==='personal'?place.personal:place.category===filter||(place.tags||[]).includes(filter))}
 function optionalLinks(place){return `${place.websiteUrl?`<a href="${place.websiteUrl}" target="_blank" rel="noopener noreferrer">WEBSITE</a>`:''}`}
 function badgeFor(place){const tagKey=(place.tags||[]).find(tag=>badgeIconMap[tag]);const subKey=place.subcategory.split(' / ')[0];const key=tagKey|| (badgeIconMap[subKey]?subKey:(badgeIconMap[place.subcategory]?place.subcategory:badgeIconMap[place.category]?place.category:''));return key?`<img class="badge-icon" src="${badgeIconMap[key]}" alt="" aria-hidden="true" onerror="this.remove()">`:''}
-function cardMarkup(place){return `<article class="card" id="card-${place.id}" style="--accent:${place.personal?'var(--love)':categoryColor[place.category]}"><div class="card-meta">${badgeFor(place)}${place.area} · ${place.subcategory}</div><h3>${place.name}</h3>${place.personal?`<div class="personal"><img class="badge-icon" src="${assetRoot}/badges/badge-our-pick.svg" alt="" aria-hidden="true" onerror="this.remove()">OUR PICK</div>`:''}<p>${place.note}</p><div class="place-links"><a href="${mapsUrl(place)}" target="_blank" rel="noopener noreferrer">OPEN IN GOOGLE MAPS</a><a href="${imagesUrl(place)}" target="_blank" rel="noopener noreferrer">SEE PHOTOS</a>${optionalLinks(place)}</div></article>`}
+function cardMarkup(place){return `<article class="card" id="card-${place.id}" style="--accent:${place.personal?'var(--love)':categoryColor[place.category]}"><h3>${place.name}</h3><div class="card-meta">${badgeFor(place)}${place.area} · ${place.subcategory}</div>${place.personal?`<div class="personal"><img class="badge-icon" src="${assetRoot}/badges/badge-our-pick.svg" alt="" aria-hidden="true" onerror="this.remove()">OUR PICK</div>`:''}<p>${place.note}</p><div class="place-links"><a href="${mapsUrl(place)}" target="_blank" rel="noopener noreferrer">OPEN IN GOOGLE MAPS</a><a href="${imagesUrl(place)}" target="_blank" rel="noopener noreferrer">SEE PHOTOS</a>${optionalLinks(place)}</div></article>`}
 function renderList(visible){const list=document.getElementById('mapList');list.innerHTML=visible.map(place=>`<div class="place-row" id="row-${place.id}" tabindex="0" data-place-id="${place.id}"><div class="place-top"><b>${place.name}</b><span class="pill" style="color:${place.personal?'var(--love)':categoryColor[place.category]}">${badgeFor(place)}${categoryLabel[place.category]}</span></div><p>${place.note}</p><div class="place-links"><a href="${mapsUrl(place)}" target="_blank" rel="noopener noreferrer">MAPS</a><a href="${imagesUrl(place)}" target="_blank" rel="noopener noreferrer">PHOTOS</a>${optionalLinks(place)}</div></div>`).join('');list.querySelectorAll('.place-row').forEach(row=>{const focus=()=>{const place=places.find(item=>item.id===row.dataset.placeId);map.setView([place.lat,place.lng],Math.max(map.getZoom(),15),{animate:true});markerMap.get(place.id).openPopup();row.classList.add('is-active');setTimeout(()=>row.classList.remove('is-active'),1200)};row.addEventListener('click',event=>{if(event.target.closest('a'))return;focus()});row.addEventListener('keydown',event=>{if(event.key==='Enter'||event.key===' '){event.preventDefault();focus()}})});}
 function renderMap(filter='all',area=''){const visible=places.filter(place=>(!area||place.area===area)&&matches(place,filter));document.querySelectorAll('.filter').forEach(button=>button.setAttribute('aria-selected',button.dataset.filter===filter?'true':'false'));document.getElementById('listTitle').textContent=`${area?area.toUpperCase()+' · ':''}${filterLabels[filter].toUpperCase()}`;markerMap.forEach((marker,id)=>{const show=visible.some(place=>place.id===id);if(show)marker.addTo(map);else map.removeLayer(marker)});renderList(visible);if(visible.length){const bounds=L.latLngBounds(visible.map(place=>[place.lat,place.lng]));map.fitBounds(bounds,{padding:[28,28],maxZoom:14})}}
 function renderCards(filter='all',scope){const visible=places.filter(place=>(scope?place.area===scope:true)&&matches(place,filter));const target=scope?document.querySelector(`[data-scope="${scope}"]`).nextElementSibling:document.getElementById('allCards');if(target)target.innerHTML=visible.map(cardMarkup).join('')||'<p>No places in this filter yet.</p>'}
@@ -176,7 +1132,7 @@ function viewHash(filter=viewState.filter,area=viewState.area){return `#map/${fi
 function parseViewHash(){const parts=location.hash.replace(/^#map\/?/,'').split('/').filter(Boolean);if(!location.hash.startsWith('#map'))return null;const first=parts[0]||'all';const filter=first==='picks'?'personal':filterLabels[first]?first:'all';const areaSlug=filter===first||first==='picks'?parts[1]:parts[0];const area=areaNames[areaSlug]||'';return {filter,area}}
 function applyView(next,push=false){viewState.filter=filterLabels[next.filter]?next.filter:'all';viewState.area=next.area||'';renderMap(viewState.filter,viewState.area);if(push)history.pushState(null,'',viewHash());}
 function routeMap(route){const relevant=route.stops.map(placeById).filter(Boolean);applyView({filter:'all',area:''},false);document.getElementById('map').scrollIntoView({behavior:'smooth'});if(relevant.length)map.fitBounds(L.latLngBounds(relevant.map(place=>[place.lat,place.lng])),{padding:[42,42],maxZoom:14})}
-function renderRoutes(){const section=document.createElement('section');section.className='routes-section';section.id='routes';section.innerHTML=`<div class="routes-head"><div><div class="kicker">WAYS TO USE THE CITY</div><h2>AUTHORED<br>ROUTES.</h2></div><p>Not an itinerary machine. Just a few flexible lines through the city, based on what this guide is actually good at.</p></div><div class="route-list">${routes.map(route=>`<article class="route"><div class="route-number">${route.number}</div><div><h3>${route.title}</h3><p>${route.intent}</p><div class="route-stops">${route.stops.map(id=>`<span class="route-stop">${placeById(id)?.name||id}</span>`).join('')}</div><div class="route-actions"><button type="button" data-route-export="${route.number}">COPY TO LLM</button><button type="button" data-route-map="${route.number}">OPEN STOPS IN MAP</button></div></div></article>`).join('')}</div>`;document.querySelector('.callout').before(section);section.querySelectorAll('[data-route-export]').forEach(button=>button.addEventListener('click',()=>copyText(formatRoute(routes.find(route=>route.number===button.dataset.routeExport)),'Route')));section.querySelectorAll('[data-route-map]').forEach(button=>button.addEventListener('click',()=>routeMap(routes.find(route=>route.number===button.dataset.routeMap))));}
+function renderRoutes(){const section=document.createElement('section');section.className='routes-section';section.id='routes';section.innerHTML=`<div class="routes-head"><div><div class="kicker">WAYS TO USE THE CITY</div><h2>AUTHORED<br>ROUTES.</h2></div><p>Not an itinerary machine. Just a few flexible lines through the city, based on what this guide is actually good at.</p></div><div class="route-list">${routes.map(route=>`<article class="route"><div class="route-number">${route.number}</div><div><h3>${route.title}</h3><p>${route.intent}</p><ol class="route-stops">${route.stops.map(id=>`<li class="route-stop">${placeById(id)?.name||id}</li>`).join('')}</ol><div class="route-actions"><button type="button" data-route-export="${route.number}">COPY TO LLM</button><button type="button" data-route-map="${route.number}">OPEN STOPS IN MAP</button></div></div></article>`).join('')}</div>`;document.querySelector('.callout').before(section);section.querySelectorAll('[data-route-export]').forEach(button=>button.addEventListener('click',()=>copyText(formatRoute(routes.find(route=>route.number===button.dataset.routeExport)),'Route')));section.querySelectorAll('[data-route-map]').forEach(button=>button.addEventListener('click',()=>routeMap(routes.find(route=>route.number===button.dataset.routeMap))));}
 function renderExportSheet(){const sheet=document.createElement('div');sheet.className='export-sheet';sheet.id='exportSheet';sheet.hidden=true;sheet.innerHTML=`<div class="export-dialog" role="dialog" aria-modal="true" aria-labelledby="exportTitle"><div class="export-head"><div><div class="kicker">CLIPBOARD / LLM</div><h2 id="exportTitle">COPY / EXPORT.</h2></div><button class="export-close" type="button" aria-label="Close export panel">×</button></div><div class="export-options">${[['everything','EVERYTHING → LLM','The complete guide context'],['current','CURRENT VIEW → LLM','What the map currently shows'],['coffee','COFFEE','Category list'],['vegan','VEGAN','Category list'],['buy','BROWSE / BUY','Category list'],['see','SEE / DO','Category list'],['gracia','GRÀCIA','Area list'],['poblenou','POBLENOU','Area list'],['personal','OUR PICKS','Personal list'],['json','RAW JSON','Developer export'],['short','SHORT SHARE TEXT','WhatsApp-sized']].map(([key,label,description])=>`<button class="export-button" type="button" data-export="${key}">${label}<small>${description}</small></button>`).join('')}</div><p class="export-status" id="exportStatus" aria-live="polite"></p></div>`;document.body.append(sheet);let trigger=document.getElementById('openExport');if(!trigger){trigger=document.createElement('button');trigger.id='openExport';trigger.type='button';trigger.className='utility-button';trigger.innerHTML='<img class="ui-icon" src="assets/assets/svg/icons/icon-map.svg" alt="" aria-hidden="true">COPY / EXPORT';document.querySelector('.map-head').append(trigger)}const close=sheet.querySelector('.export-close');let lastFocus=trigger;function closeSheet(){sheet.hidden=true;document.body.classList.remove('export-open');lastFocus?.focus()}function openSheet(){lastFocus=document.activeElement;sheet.hidden=false;document.body.classList.add('export-open');close.focus()}trigger.addEventListener('click',openSheet);close.addEventListener('click',closeSheet);sheet.addEventListener('click',event=>{if(event.target===sheet)closeSheet()});document.addEventListener('keydown',event=>{if(event.key==='Escape'&&!sheet.hidden)closeSheet()});document.addEventListener('keydown',event=>{if(event.key==='Tab'&&!sheet.hidden){const focusable=[...sheet.querySelectorAll('button')];if(event.shiftKey&&document.activeElement===focusable[0]){event.preventDefault();focusable.at(-1).focus()}else if(!event.shiftKey&&document.activeElement===focusable.at(-1)){event.preventDefault();focusable[0].focus()}}});sheet.querySelectorAll('[data-export]').forEach(button=>button.addEventListener('click',()=>{const key=button.dataset.export;const categoryKeys={coffee:'coffee',vegan:'vegan',buy:'buy',see:'see'};const text=key==='everything'?formatFullLLMExport():key==='current'?formatCurrentView():key==='json'?formatRawJSON():key==='short'?formatShortShare():key==='gracia'?formatAreaExport('Gràcia'):key==='poblenou'?formatAreaExport('Poblenou'):key==='personal'?formatCategoryExport('personal'):formatCategoryExport(categoryKeys[key]);copyText(text,button.childNodes[0].textContent.trim())}));}
 renderRoutes();renderExportSheet();
 document.querySelectorAll('.filter').forEach(button=>button.addEventListener('click',()=>applyView({filter:button.dataset.filter,area:''},true)));
