@@ -1,0 +1,124 @@
+{
+  "palette": {
+    "paper": "#E8E0D4",
+    "ink": "#151515",
+    "muted": "#5C5851",
+    "gracia": "#E45E40",
+    "poblenou": "#507DAA",
+    "encants": "#6F9C88",
+    "sagrada": "#E5B83F",
+    "sea": "#2C94B8"
+  },
+  "category_colours": {
+    "coffee": "gracia",
+    "vegan": "encants",
+    "see-do": "sagrada",
+    "secondhand": "poblenou",
+    "office": "ink (sea dot)",
+    "favorite": "gracia (ink dot)"
+  },
+  "plaques": [
+    {
+      "file": "plaque-map.svg",
+      "catalan": "MAPA",
+      "english": "map",
+      "accent": "gracia"
+    },
+    {
+      "file": "plaque-coffee.svg",
+      "catalan": "CAFÈ",
+      "english": "espresso",
+      "accent": "gracia"
+    },
+    {
+      "file": "plaque-vegan.svg",
+      "catalan": "VEGÀ",
+      "english": "vegan",
+      "accent": "encants"
+    },
+    {
+      "file": "plaque-see-do.svg",
+      "catalan": "MIRAR",
+      "english": "see & do",
+      "accent": "sagrada"
+    },
+    {
+      "file": "plaque-secondhand.svg",
+      "catalan": "SEGONA MÀ",
+      "english": "secondhand",
+      "accent": "poblenou"
+    },
+    {
+      "file": "plaque-office.svg",
+      "catalan": "OFICINA",
+      "english": "office",
+      "accent": "sea"
+    },
+    {
+      "file": "plaque-favorite.svg",
+      "catalan": "LA NOSTRA TRIA",
+      "english": "our pick",
+      "accent": "gracia"
+    },
+    {
+      "file": "plaque-ticket.svg",
+      "catalan": "ENTRADA",
+      "english": "ticket",
+      "accent": "sagrada"
+    },
+    {
+      "file": "plaque-walk.svg",
+      "catalan": "A PEU",
+      "english": "on foot",
+      "accent": "gracia"
+    },
+    {
+      "file": "plaque-metro.svg",
+      "catalan": "METRO",
+      "english": "metro",
+      "accent": "poblenou"
+    },
+    {
+      "file": "plaque-market.svg",
+      "catalan": "MERCAT",
+      "english": "market",
+      "accent": "encants"
+    },
+    {
+      "file": "plaque-beach.svg",
+      "catalan": "PLATJA",
+      "english": "beach",
+      "accent": "sea"
+    },
+    {
+      "file": "plaque-gracia.svg",
+      "catalan": "GRÀCIA",
+      "english": "neighbourhood · the main one",
+      "accent": "gracia"
+    },
+    {
+      "file": "plaque-poblenou.svg",
+      "catalan": "POBLENOU",
+      "english": "neighbourhood · after work",
+      "accent": "poblenou"
+    },
+    {
+      "file": "plaque-encants.svg",
+      "catalan": "ELS ENCANTS",
+      "english": "flea market · mirrored roof",
+      "accent": "encants"
+    },
+    {
+      "file": "plaque-sagrada.svg",
+      "catalan": "SAGRADA FAMÍLIA",
+      "english": "the one big sight",
+      "accent": "sagrada"
+    },
+    {
+      "file": "plaque-trafalgar.svg",
+      "catalan": "TRAFALGAR 6",
+      "english": "work base · near Arc de Triomf",
+      "accent": "sea"
+    }
+  ]
+}
